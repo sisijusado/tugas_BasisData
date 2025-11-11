@@ -1,3 +1,7 @@
+Nama : Sisi Jusado
+Nim  : D0224039
+Kelas : D
+
 Tugas Basis Data – Database KebunSayur
 
 Repository ini berisi tugas Basis Data yang mencakup:
