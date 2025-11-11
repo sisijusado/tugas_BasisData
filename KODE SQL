@@ -1,0 +1,320 @@
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| asistensi1         |
+| buku               |
+| db_latihan_dml     |
+| identitas          |
+| information_schema |
+| jusado             |
+| kebunsayur         |
+| latihan            |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
+| tugas3_d0224039    |
+| uts_d0224039       |
++--------------------+
+14 rows in set (0.002 sec)
+
+MariaDB [(none)]> use KebunSayur;
+Database changed
+MariaDB [KebunSayur]> show tables;
++----------------------+
+| Tables_in_kebunsayur |
++----------------------+
+| panen                |
+| petani               |
+| sayur                |
++----------------------+
+3 rows in set (0.002 sec)
+
+MariaDB [KebunSayur]> desc sayur;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| id_sayur    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama_sayur  | varchar(50) | YES  |     | NULL    |                |
+| waktu_tanam | int(11)     | YES  |     | NULL    |                |
+| waktu_panen | int(11)     | YES  |     | NULL    |                |
+| jenis_tanah | varchar(50) | YES  |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.038 sec)
+
+MariaDB [KebunSayur]> select * from sayur;
++----------+----------------+-------------+-------------+------------------+
+| id_sayur | nama_sayur     | waktu_tanam | waktu_panen | jenis_tanah      |
++----------+----------------+-------------+-------------+------------------+
+|        1 | Bayam          |           7 |          25 | Lempung          |
+|        2 | Kangkung       |           5 |          21 | Gembur           |
+|        3 | Selada         |          10 |          35 | Berpasir         |
+|        4 | Sawi           |           8 |          30 | Gembur           |
+|        5 | Tomat          |          15 |          70 | Lempung          |
+|        6 | Cabai          |          20 |          80 | Lempung Berpasir |
+|        7 | Terong         |          18 |          75 | Lempung          |
+|        8 | Timun          |          12 |          55 | Berpasir         |
+|        9 | Wortel         |          14 |          90 | Berpasir         |
+|       10 | Bawang Merah   |          10 |          60 | Lempung Berpasir |
+|       11 | Brokoli        |          12 |          70 | Liat             |
+|       12 | Kubis          |          15 |          90 | Lempung          |
+|       13 | Seledri        |          10 |          60 | Lempung Berpasir |
+|       14 | Pakchoy        |           7 |          30 | Gembur           |
+|       15 | Kacang Panjang |          12 |          55 | Lempung          |
++----------+----------------+-------------+-------------+------------------+
+15 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> desc petani;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| id_petani | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nama      | varchar(50)  | YES  |     | NULL    |                |
+| alamat    | varchar(100) | YES  |     | NULL    |                |
+| no_hp     | varchar(15)  | YES  |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+4 rows in set (0.034 sec)
+
+MariaDB [KebunSayur]> select * from petani;
++-----------+-----------+-------------------+------------+
+| id_petani | nama      | alamat            | no_hp      |
++-----------+-----------+-------------------+------------+
+|         1 | Pak Budi  | Desa Mekar Sari   | 081200001  |
+|         2 | bu siti   | Desa Harapan Baru | 081200002  |
+|         3 | Pak joko  | Desa Sukamuju     | 081200003  |
+|         4 | Bu rina   | Desa Tanete       | 081200004  |
+|         5 | Pak andi  | Desa galung       | 081200005  |
+|         6 | Bu wati   | Desa lambe        | 081200006  |
+|         7 | Pak umar  | Desa pao-pao      | 081200007  |
+|         8 | Bu mira   | Desa soreang      | 081200008  |
+|         9 | Pak ahmad | Desa somba        | 081200009  |
+|        10 | Bu lilis  | Desa rea timur    | 0812000010 |
+|        11 | Pak dani  | Desa padang       | 0812000011 |
+|        12 | Bu Tina   | Desa Baku         | 081200012  |
+|        13 | Pak hasan | Desa pekkabata    | 081200013  |
+|        14 | Bu rosi   | Desa laliko       | 081200014  |
+|        15 | Pak rafi  | Desa tande        | 081200015  |
++-----------+-----------+-------------------+------------+
+15 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> desc panen;
++---------------+---------+------+-----+---------+----------------+
+| Field         | Type    | Null | Key | Default | Extra          |
++---------------+---------+------+-----+---------+----------------+
+| id_panen      | int(11) | NO   | PRI | NULL    | auto_increment |
+| id_sayur      | int(11) | YES  | MUL | NULL    |                |
+| id_petani     | int(11) | YES  | MUL | NULL    |                |
+| jumlah_kg     | int(11) | YES  |     | NULL    |                |
+| tanggal_panen | date    | YES  |     | NULL    |                |
++---------------+---------+------+-----+---------+----------------+
+5 rows in set (0.031 sec)
+
+MariaDB [KebunSayur]> select * from panen;
++----------+----------+-----------+-----------+---------------+
+| id_panen | id_sayur | id_petani | jumlah_kg | tanggal_panen |
++----------+----------+-----------+-----------+---------------+
+|        1 |        1 |         1 |        12 | 2025-01-10    |
+|        2 |        2 |         2 |        15 | 2025-01-12    |
+|        3 |        3 |         3 |        10 | 2025-01-15    |
+|        4 |        4 |         4 |        20 | 2025-01-17    |
+|        5 |        5 |         5 |        18 | 2025-01-20    |
+|        6 |        6 |         6 |        25 | 2025-01-22    |
+|        7 |        7 |         7 |        17 | 2025-01-15    |
+|        8 |        8 |         8 |        30 | 2025-01-28    |
+|        9 |        9 |         9 |        22 | 2025-01-30    |
+|       10 |       10 |        10 |        14 | 2025-01-01    |
+|       11 |       11 |        11 |        12 | 2025-01-03    |
+|       12 |       12 |        12 |        19 | 2025-01-05    |
+|       13 |       13 |        13 |        15 | 2025-01-07    |
+|       14 |       14 |        14 |        16 | 2025-01-09    |
+|       15 |       15 |        15 |        21 | 2025-01-11    |
++----------+----------+-----------+-----------+---------------+
+15 rows in set (0.002 sec)
+
+MariaDB [KebunSayur]> SELECT * FROM sayur
+    -> WHERE jenis_tanah = 'Gembur';
++----------+------------+-------------+-------------+-------------+
+| id_sayur | nama_sayur | waktu_tanam | waktu_panen | jenis_tanah |
++----------+------------+-------------+-------------+-------------+
+|        2 | Kangkung   |           5 |          21 | Gembur      |
+|        4 | Sawi       |           8 |          30 | Gembur      |
+|       14 | Pakchoy    |           7 |          30 | Gembur      |
++----------+------------+-------------+-------------+-------------+
+3 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> SELECT * FROM petani
+    -> WHERE alamat LIKE 'Desa%';
++-----------+-----------+-------------------+------------+
+| id_petani | nama      | alamat            | no_hp      |
++-----------+-----------+-------------------+------------+
+|         1 | Pak Budi  | Desa Mekar Sari   | 081200001  |
+|         2 | bu siti   | Desa Harapan Baru | 081200002  |
+|         3 | Pak joko  | Desa Sukamuju     | 081200003  |
+|         4 | Bu rina   | Desa Tanete       | 081200004  |
+|         5 | Pak andi  | Desa galung       | 081200005  |
+|         6 | Bu wati   | Desa lambe        | 081200006  |
+|         7 | Pak umar  | Desa pao-pao      | 081200007  |
+|         8 | Bu mira   | Desa soreang      | 081200008  |
+|         9 | Pak ahmad | Desa somba        | 081200009  |
+|        10 | Bu lilis  | Desa rea timur    | 0812000010 |
+|        11 | Pak dani  | Desa padang       | 0812000011 |
+|        12 | Bu Tina   | Desa Baku         | 081200012  |
+|        13 | Pak hasan | Desa pekkabata    | 081200013  |
+|        14 | Bu rosi   | Desa laliko       | 081200014  |
+|        15 | Pak rafi  | Desa tande        | 081200015  |
++-----------+-----------+-------------------+------------+
+15 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> SELECT * FROM panen
+    -> WHERE jumlah_kg > 20;
++----------+----------+-----------+-----------+---------------+
+| id_panen | id_sayur | id_petani | jumlah_kg | tanggal_panen |
++----------+----------+-----------+-----------+---------------+
+|        6 |        6 |         6 |        25 | 2025-01-22    |
+|        8 |        8 |         8 |        30 | 2025-01-28    |
+|        9 |        9 |         9 |        22 | 2025-01-30    |
+|       15 |       15 |        15 |        21 | 2025-01-11    |
++----------+----------+-----------+-----------+---------------+
+4 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> SELECT * FROM sayur
+    -> WHERE waktu_panen > 60;
++----------+------------+-------------+-------------+------------------+
+| id_sayur | nama_sayur | waktu_tanam | waktu_panen | jenis_tanah      |
++----------+------------+-------------+-------------+------------------+
+|        5 | Tomat      |          15 |          70 | Lempung          |
+|        6 | Cabai      |          20 |          80 | Lempung Berpasir |
+|        7 | Terong     |          18 |          75 | Lempung          |
+|        9 | Wortel     |          14 |          90 | Berpasir         |
+|       11 | Brokoli    |          12 |          70 | Liat             |
+|       12 | Kubis      |          15 |          90 | Lempung          |
++----------+------------+-------------+-------------+------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> SELECT * FROM sayur
+    -> WHERE waktu_tanam BETWEEN 7 AND 12;
++----------+----------------+-------------+-------------+------------------+
+| id_sayur | nama_sayur     | waktu_tanam | waktu_panen | jenis_tanah      |
++----------+----------------+-------------+-------------+------------------+
+|        1 | Bayam          |           7 |          25 | Lempung          |
+|        3 | Selada         |          10 |          35 | Berpasir         |
+|        4 | Sawi           |           8 |          30 | Gembur           |
+|        8 | Timun          |          12 |          55 | Berpasir         |
+|       10 | Bawang Merah   |          10 |          60 | Lempung Berpasir |
+|       11 | Brokoli        |          12 |          70 | Liat             |
+|       13 | Seledri        |          10 |          60 | Lempung Berpasir |
+|       14 | Pakchoy        |           7 |          30 | Gembur           |
+|       15 | Kacang Panjang |          12 |          55 | Lempung          |
++----------+----------------+-------------+-------------+------------------+
+9 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> SELECT * FROM panen
+    -> WHERE tanggal_panen BETWEEN '2025-01-10' AND '2025-01-20';
++----------+----------+-----------+-----------+---------------+
+| id_panen | id_sayur | id_petani | jumlah_kg | tanggal_panen |
++----------+----------+-----------+-----------+---------------+
+|        1 |        1 |         1 |        12 | 2025-01-10    |
+|        2 |        2 |         2 |        15 | 2025-01-12    |
+|        3 |        3 |         3 |        10 | 2025-01-15    |
+|        4 |        4 |         4 |        20 | 2025-01-17    |
+|        5 |        5 |         5 |        18 | 2025-01-20    |
+|        7 |        7 |         7 |        17 | 2025-01-15    |
+|       15 |       15 |        15 |        21 | 2025-01-11    |
++----------+----------+-----------+-----------+---------------+
+7 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> SELECT * FROM petani
+    -> WHERE id_petani BETWEEN 5 AND 10;
++-----------+-----------+----------------+------------+
+| id_petani | nama      | alamat         | no_hp      |
++-----------+-----------+----------------+------------+
+|         5 | Pak andi  | Desa galung    | 081200005  |
+|         6 | Bu wati   | Desa lambe     | 081200006  |
+|         7 | Pak umar  | Desa pao-pao   | 081200007  |
+|         8 | Bu mira   | Desa soreang   | 081200008  |
+|         9 | Pak ahmad | Desa somba     | 081200009  |
+|        10 | Bu lilis  | Desa rea timur | 0812000010 |
++-----------+-----------+----------------+------------+
+6 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> SELECT * FROM sayur
+    -> WHERE waktu_panen BETWEEN 30 AND 70;
++----------+----------------+-------------+-------------+------------------+
+| id_sayur | nama_sayur     | waktu_tanam | waktu_panen | jenis_tanah      |
++----------+----------------+-------------+-------------+------------------+
+|        3 | Selada         |          10 |          35 | Berpasir         |
+|        4 | Sawi           |           8 |          30 | Gembur           |
+|        5 | Tomat          |          15 |          70 | Lempung          |
+|        8 | Timun          |          12 |          55 | Berpasir         |
+|       10 | Bawang Merah   |          10 |          60 | Lempung Berpasir |
+|       11 | Brokoli        |          12 |          70 | Liat             |
+|       13 | Seledri        |          10 |          60 | Lempung Berpasir |
+|       14 | Pakchoy        |           7 |          30 | Gembur           |
+|       15 | Kacang Panjang |          12 |          55 | Lempung          |
++----------+----------------+-------------+-------------+------------------+
+9 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> SELECT p.id_panen, s.nama_sayur, t.nama AS nama_petani, p.jumlah_kg
+    -> FROM panen p
+    -> JOIN sayur s ON p.id_sayur = s.id_sayur
+    -> JOIN petani t ON p.id_petani = t.id_petani
+    -> WHERE p.jumlah_kg BETWEEN 10 AND 20;
++----------+--------------+-------------+-----------+
+| id_panen | nama_sayur   | nama_petani | jumlah_kg |
++----------+--------------+-------------+-----------+
+|        1 | Bayam        | Pak Budi    |        12 |
+|        2 | Kangkung     | bu siti     |        15 |
+|        3 | Selada       | Pak joko    |        10 |
+|        4 | Sawi         | Bu rina     |        20 |
+|        5 | Tomat        | Pak andi    |        18 |
+|        7 | Terong       | Pak umar    |        17 |
+|       10 | Bawang Merah | Bu lilis    |        14 |
+|       11 | Brokoli      | Pak dani    |        12 |
+|       12 | Kubis        | Bu Tina     |        19 |
+|       13 | Seledri      | Pak hasan   |        15 |
+|       14 | Pakchoy      | Bu rosi     |        16 |
++----------+--------------+-------------+-----------+
+11 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> SELECT p.id_panen, s.nama_sayur, p.tanggal_panen
+    -> FROM panen p
+    -> JOIN sayur s ON p.id_sayur = s.id_sayur
+    -> WHERE p.tanggal_panen BETWEEN '2025-01-01' AND '2025-01-31';
++----------+----------------+---------------+
+| id_panen | nama_sayur     | tanggal_panen |
++----------+----------------+---------------+
+|        1 | Bayam          | 2025-01-10    |
+|        2 | Kangkung       | 2025-01-12    |
+|        3 | Selada         | 2025-01-15    |
+|        4 | Sawi           | 2025-01-17    |
+|        5 | Tomat          | 2025-01-20    |
+|        6 | Cabai          | 2025-01-22    |
+|        7 | Terong         | 2025-01-15    |
+|        8 | Timun          | 2025-01-28    |
+|        9 | Wortel         | 2025-01-30    |
+|       10 | Bawang Merah   | 2025-01-01    |
+|       11 | Brokoli        | 2025-01-03    |
+|       12 | Kubis          | 2025-01-05    |
+|       13 | Seledri        | 2025-01-07    |
+|       14 | Pakchoy        | 2025-01-09    |
+|       15 | Kacang Panjang | 2025-01-11    |
++----------+----------------+---------------+
+15 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]> SELECT * FROM petani
+    -> WHERE nama LIKE 'Bu%';
++-----------+----------+-------------------+------------+
+| id_petani | nama     | alamat            | no_hp      |
++-----------+----------+-------------------+------------+
+|         2 | bu siti  | Desa Harapan Baru | 081200002  |
+|         4 | Bu rina  | Desa Tanete       | 081200004  |
+|         6 | Bu wati  | Desa lambe        | 081200006  |
+|         8 | Bu mira  | Desa soreang      | 081200008  |
+|        10 | Bu lilis | Desa rea timur    | 0812000010 |
+|        12 | Bu Tina  | Desa Baku         | 081200012  |
+|        14 | Bu rosi  | Desa laliko       | 081200014  |
++-----------+----------+-------------------+------------+
+7 rows in set (0.001 sec)
+
+MariaDB [KebunSayur]>
