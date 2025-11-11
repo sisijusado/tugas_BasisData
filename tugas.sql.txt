@@ -1,0 +1,21 @@
+-- Menampilkan daftar database
+SHOW DATABASES;
+
+-- Memakai database KebunSayur
+USE KebunSayur;
+
+-- Tabel SAYUR (contoh query WHERE)
+SELECT * FROM sayur 
+WHERE jenis_tanah = 'Gembur';
+
+-- Query WHERE lainnya
+SELECT * FROM panen 
+WHERE jumlah_kg > 20;
+
+-- Query BETWEEN (angka)
+SELECT * FROM sayur 
+WHERE waktu_tanam BETWEEN 7 AND 12;
+
+-- Query BETWEEN (tanggal)
+SELECT * FROM panen
+WHERE tanggal_panen BETWEEN '2025-01-10' AND '2025-01-20';
